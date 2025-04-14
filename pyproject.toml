@@ -5,12 +5,14 @@ build-backend = "hatchling.build"
 [project]
 name = "tldraw"
 version = "3.0.0"
-dependencies = ["anywidget", "ipylab", "requests", "ipykernel"]
+dependencies = ["anywidget"]
 description = "Tldraw for Jupyter"
 license = "MIT"
 readme = "README.md"
 [project.optional-dependencies]
 dev = ["watchfiles", "jupyterlab"]
+makereal = ["ipylab", "requests"]
+unknown = ["ipykernel"]
 
 # automatically add the dev feature to the default env (e.g., hatch shell)
 [tool.hatch.envs.default]
