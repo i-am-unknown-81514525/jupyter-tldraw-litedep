@@ -1,0 +1,40 @@
+name: Build and Upload Hatch Package
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '16'
+
+    - name: Install dependencies
+      run: |
+        python -m venv .venv
+        source .venv/bin/activate
+        pip install hatch
+        npm install
+
+    - name: Build hatch package
+      run: |
+        source .venv/bin/activate
+        hatch build
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: hatch-package
+        path: dist/*
