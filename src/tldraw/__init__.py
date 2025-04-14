@@ -7,7 +7,6 @@ from traitlets import Unicode, Int, observe, Bool, List, Any,Tuple
 from traitlets import List, Dict, Unicode
 
 import io
-from .prompt import sent_request_to_openai
 
 try:
     __version__ = importlib.metadata.version("tldraw")
@@ -192,6 +191,7 @@ class MakeReal(anywidget.AnyWidget):
             
             Reply ONLY with python code.
             """
+        from .prompt import sent_request_to_openai
         result = sent_request_to_openai(self.prompt, base64_image, self.api_key)
         print(result)
 
